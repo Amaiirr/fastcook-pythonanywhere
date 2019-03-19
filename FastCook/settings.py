@@ -10,8 +10,8 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/2.1/ref/settings/
 """
 
-import dj_database_url       
-from decouple import config  
+import dj_database_url
+from decouple import config
 
 import os
 
@@ -31,7 +31,7 @@ SECRET_KEY = 'h^+x(g+dz1=53$e8wpl=+2it-w1-x*&mxpg%pyjp*yh4qhr0hf'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config('DEBUG', default=False, cast=bool)
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['fastcookapp.pythonanywhere.com']
 
 
 # Application definition
@@ -141,11 +141,11 @@ USE_TZ = True
 
 PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 
-STATIC_ROOT = os.path.join(PROJECT_ROOT, 'staticfiles')
+STATIC_ROOT = '/home/fastcookapp/fastcook-pythonanywhere/fastcookapp/static'
 STATIC_URL = '/static/'
 #STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
-MEDIA_ROOT = os.path.join(BASE_DIR,"fastcookapp/images")
+MEDIA_ROOT = '/home/fastcookapp/fastcook-pythonanywhere/fastcookapp/images'
 MEDIA_URL = '/images/'
 
 
