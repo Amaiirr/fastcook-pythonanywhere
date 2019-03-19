@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script type="text/javascript";>
+	function main(container)
+	{
+	  // Checks if the browser is supported
+	  if (!mxClient.isBrowserSupported())
+	  {
+	    // Displays an error message if the browser is not supported.
+	    mxUtils.error('Browser is not supported!', 200, false);
+	  }
+	}
+</script>
+  <title>js drag and drop</title>
+  <style type="text/css">
+
+.dragdiv, .container {
+    height: 400px;
+    width: 40%;
+    border: 2px solid black;
+    float: left;
+    margin-top: 150px;
+    margin-left: 7%;
+}
+
+.drag {
+    cursor: move;
+    display:inline-block;
+}
+
+
+  .ui-resizable-helper { border: 1px dotted gray; }
+
+
+  </style>
+
+
+
+  <script type = "text/javascript" src = "sample.js"> </script>
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script type="text/javascript">
+   mxBasePath = 'javascript/src';
+  </script>
+  <script type="text/javascript" src="javascript/src/js/mxClient.js"></script>
+  <link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.1/themes/base/jquery-ui.css"/>
+
+    <script>
+
+
+           /*$(document).ready(function() {
+            $( "#img_content" ).draggable().resizable({
+            animate:true
+            });;
+          });*/
+
+
+          $(function() {
+
+            $('.drag').draggable({
+              helper: "clone",
+              revert: "invalid"
+            });
+
+
+
+            $('.container').droppable({
+              
+              accept: ".drag",
+             
+              drop: function(e, u) {
+                
+                var dropElement = u.helper.clone();
+                var parent = $('.container');
+
+                dropElement.appendTo(".container");
+
+                var leftAdjust = dropElement.position().left - parent.offset().left;
+                var topAdjust = dropElement.position().top - parent.offset().top;
+
+                dropElement.css({
+                  left: leftAdjust,
+                  top: topAdjust,
+                  cursor: "move"
+                });
+
+                dropElement.attr('class', 'dropped').draggable({
+                  containment: ".container"
+                });
+
+                $( ".resize" ).resizable({
+                    animate: true,
+                });
+
+              }
+            });
+
+            
+
+          });
+    </script>
+</head>
+<body>
+
+  <div class="dragdiv">
+
+    <div class = drag> 
+      <img src="mypic.jpg" class="resize" height = 100px">
+    </div>
+  </div>
+
+<div style="position:relative" class="container">
+  <div class="dropped ui-draggable"></div>
+</div>
+
+</body>
+</html>

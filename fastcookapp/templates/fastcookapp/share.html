@@ -1,0 +1,71 @@
+{% extends 'fastcookapp/base.html' %}
+{% load staticfiles %}
+{% block content %}
+
+<!doctype html>
+
+<html>
+
+
+<p id = "sharedTitle" class = "shareInfo"> {{graph.title}} </p>
+<div class="text-center">
+<span class="fa fa-cutlery" style="font-size:20px">  </span> <b> Serves: </b> {{graph.serving}} &nbsp;&nbsp;&nbsp;
+<span class="fa fa-clock-o" style="font-size:20px">  </span> <b> Time to cook: </b> {{graph.time}} minutes
+</br>
+</div>
+
+
+<div class = "shareInfo" style="font-size: 15px;">
+    Created by: {{user}}
+</div>
+
+
+<section class='rating-widget'>
+              
+              <!-- Rating Stars Box -->
+              <div class='rating-stars text-center'>
+                <ul id='stars'>
+                  <li class='star' title='Easy' data-value='1'>
+                    <i class='fa fa-star fa-fw'></i>
+                  </li>
+                  <li class='star' title='Moderate' data-value='2'>
+                    <i class='fa fa-star fa-fw'></i>
+                  </li>
+                  <li class='star' title='Hard' data-value='3'>
+                    <i class='fa fa-star fa-fw'></i>
+                  </li>
+                  <li class='star' title='Challenging' data-value='4'>
+                    <i class='fa fa-star fa-fw'></i>
+                  </li>
+                  <li class='star' title='Professional' data-value='5'>
+                    <i class='fa fa-star fa-fw'></i>
+                  </li>
+                </ul>
+              </div>
+            
+</section>
+
+<input type="hidden" id = "rating" value="{{ rating }}">
+
+<input type="hidden" name = "xmlData" id = "sharedXMLData" value="{{ graph.XMLGraph }}">
+	
+<div id = "sharedContainer" style="position:absolute;overflow:hidden;top:150px;left:260px;bottom:36px;right:0px;cursor:default;overflow:scroll;"> </div>
+
+
+<script src="{% static 'fastcookapp/styleGraph.js' %}"></script> 
+<script src="{% static 'fastcookapp/shareGraph.js' %}"></script> 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script type="text/javascript">
+  mxBasePath = "{% static 'fastcookapp/mxgraph-master/mxgraph-master/javascript/src' %}";
+</script>
+<script src="{% static 'fastcookapp/mxgraph-master/mxgraph-master/javascript/mxClient.js' %}"></script>
+
+<script type="text/javascript">
+window.onload = function(){
+    main(document.getElementById("graphContainer"));
+}
+</script> 
+
+
+</html>
+{% endblock %}

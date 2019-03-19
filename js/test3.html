@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>js drag and drop</title>
+  <style type="text/css">
+
+.dragdiv, .container {
+    height: 400px;
+    width: 40%;
+    border: 2px solid black;
+    float: left;
+    margin-top: 150px;
+    margin-left: 7%;
+}
+
+.drag {
+    cursor: move;
+    display:inline-block;
+}
+
+  </style>
+
+
+
+  <script type = "text/javascript" src = "sample.js"> </script>
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script>
+          $(function() {
+            $('.drag').draggable({
+              helper: "clone",
+              revert: "invalid"
+            });
+
+
+
+            $('.container').droppable({
+              accept: ".drag",
+              drop: function(e, u) {
+                var dropElement = u.helper.clone();
+                var parent = $('.container');
+
+                dropElement.appendTo(".container");
+
+                var leftAdjust = dropElement.position().left - parent.offset().left;
+                var topAdjust = dropElement.position().top - parent.offset().top;
+
+                dropElement.css({
+                  left: leftAdjust,
+                  top: topAdjust,
+                  cursor: "move"
+                });
+
+                dropElement.attr('class', 'dropped').draggable({
+                  containment: ".container"
+                });
+
+                
+              }
+            });
+          });
+
+    </script>
+  
+
+
+</head>
+<body>
+
+  <div class="dragdiv">
+
+    <img src="mypic.jpg" class="drag" height = 100px">
+
+  </div>
+
+<div style="position:relative" class="container">
+  <div class="dropped ui-draggable"></div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>js drag and drop</title>
+	<style type="text/css">
+
+	*
+	{
+		margin: 0px;
+		padding: 0px;
+	}
+
+	.drag, .drop
+	{
+		height: 400px;
+		width: 40%;
+		border: 2px solid black;
+		float: left;
+		margin-top: 150px;
+		margin-left: 7%;
+	}
+
+	#dragelement
+	{
+		cursor: move;
+	}
+
+	</style>
+
+
+
+	<script type = "text/javascript" src = "sample.js"> </script>
+	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  	<script>
+  		    $(function() {
+  		    		      	$('#dragelement').draggable({ 
+  		            			containment: ".drag", 
+  		            			scroll: false
+  		      				});
+
+  		      				$('.drop').droppable({
+						        accept: ".drag",
+						        hoverClass: "ui-state-active",
+						        activeClass: "ui-state-hover",
+						        drop: function (event, ui) {
+						            
+						        },
+
+						        out: function (event, ui) {
+						            
+						        }
+						    });
+  		    			});
+  	</script>
+ 	
+
+
+</head>
+<body>
+
+	<div class="drag">
+
+		<img src="mypic.jpg" id="dragelement" height = 100px">
+
+	</div>
+
+	<div class = "drop"">
+	</div>
+
+</body>
+</html>

@@ -1,0 +1,498 @@
+{% extends 'fastcookapp/base.html' %}
+{% load staticfiles %}
+{% block content %}
+
+<!doctype html>
+
+<html>
+
+<head>
+<meta charset="utf-8"> 
+
+</head>
+
+
+
+<nav class="navbar navbar-expand navbar-light bg-light">
+  <a class="navbar-brand" href="#"></a>
+  <ul class="navbar-nav mx-auto">
+    <li class="nav-item"   style="">
+      <input class = "nav-link" type='button' id = "currentTitle" maxlength = "50" type="text" name="currentTitle" value="{{newGraphTitle}}" data-toggle="modal" data-target="#saveTitleModal" readonly > 
+    </li>
+  </ul>
+  <ul class="navbar-nav ml-auto">
+    <li class="nav-item">
+      <a class="nav-link" href="{% url 'profile' %}" data-toggle="tooltip" title="Profile"><i class="fa fa-user fa-2x"></i></a></li>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="{% url 'logout' %}" data-toggle="tooltip" title="Logout"><i class="fa fa-sign-out fa-2x"></i></a></li>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link"  data-toggle="modal" data-target="#help" style="cursor: pointer;"><span class="fa fa-question-circle fa-2x "></span> </a></li>
+    </li>
+  </ul>
+</nav>
+
+
+<!--<nav id = "menuBar" class="navbar navbar-expand navbar-light bg-light">
+  <a class="navbar-brand" href="#"></a>
+  <ul class="navbar-nav mx-auto">
+    <li class="nav-item"   style="">
+      <input class = "nav-link" type='button' id = "currentTitle" maxlength = "50" type="text" name="currentTitle" value="{{newGraphTitle}}" data-toggle="modal" data-target="#saveTitleModal" readonly > 
+    </li>
+  </ul>
+</nav>-->
+
+
+
+    <div class = "dropdown" id = "toptoolbar" >
+      <button class="btn btn-light dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        File
+      </button>
+
+      <button class = "btn btn-light" id = "shareButton" data-toggle="modal" data-target="#shareModal">Share</button>
+
+      <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+        <button class="dropdown-item" type="button" data-toggle="modal" data-target="#newModal">New</button>
+        <button id = "openXML" class="dropdown-item" type="button" data-toggle="modal" data-target="#openModal">Open</button>
+        <button class="dropdown-item" type="button" id = "saveButton">Save</button>
+        <button class="dropdown-item" type="button" data-toggle="modal" data-target="#saveAsModal">Save as</button>
+      </div>
+    </div>
+
+
+
+<div id = "toolbar" style="overflow:scroll; left: 0px; top: 110px; width: 250px; bottom: 36px;">
+
+  <h1 class = "searchForIngredients"> How would you like to search for ingredients? </h1>
+
+  </br>
+
+  <div class = "searching">
+  <button class = "searchB" id = "searchImage" onclick="hideOnClk(this.id)">By Search</button>
+  <button class= "searchB" id = "categoryImage" onclick="hideOnClk(this.id)">By Category</button>
+  </div>
+
+  <!--<form method = "get">
+      <input style = "display: none" type="text" id="searchEngine" placeholder="Type your ingredient here">
+
+  </form>-->
+
+<div id = "searchToolbar">
+<form class = "search-container" style = "display: none" id="search" method="POST" action="{% url 'search' %}">
+  
+  {% csrf_token %}
+
+  <input  type="text" name = "searchEngine" id="searchEngine" placeholder="Type your ingredient here">
+  <button type="submit" id = "searchSubmit" style="display: none;"></button>
+  <p id = "noResults"></p>
+
+</form>
+</div>
+
+
+  <div id = "byCategory">
+  <button class="collapsible " style="border-top: 2px solid #D8D8D8;">Equipment  
+    <img class = "buttonIcons" src="/images/ingredients/Equipment/microwave.png" height="40px" width="40px"> </button>
+
+  <div id = "generalContent"></div>
+
+  <button class="collapsible">Measurement 
+    <img class = "buttonIcons" src="/images/ingredients/Measurement/tablespoon.png" height="40px" width="40px"> </button>
+
+  <div id = "measurement"></div>
+
+  <button class="collapsible">Bakery
+     <img class = "buttonIcons" src="/images/ingredients/Bakery/naan.png" height="40px" width="40px">
+  </button>
+
+  <div id = "content"></div>
+
+  <button class = "collapsible"> Berries 
+    <img class = "buttonIcons" src="/images/ingredients/Berries/grapes.png" height="40px" width="40px">
+  </button>
+
+  <div id = "berries"></div>
+
+  <button class = "collapsible"> Dairies 
+    <img class = "buttonIcons" src="/images/ingredients/Dairies/milk.png" height="40px" width="40px">
+  </button>
+
+  <div id = "dairies"></div>
+
+  <button class = "collapsible"> Fruits 
+    <img class = "buttonIcons" src="/images/ingredients/Fruits/orange.png" height="40px" width="40px">
+  </button>
+
+  <div id = "fruits"></div>
+
+  <button class = "collapsible"> Meat 
+    <img class = "buttonIcons" src="/images/ingredients/Meat/jamon.png" height="40px" width="40px">
+  </button>
+
+  <div id = "meat"></div>
+
+  <button class = "collapsible"> Nut 
+    <img class = "buttonIcons" src="/images/ingredients/Nut/peanuts.png" height="40px" width="40px">
+  </button>
+
+  <div id = "nut"></div>
+
+  <button class = "collapsible"> Vegetables 
+    <img class = "buttonIcons" src="/images/ingredients/Vegetables/beet.png" height="40px" width="40px">
+  </button>
+
+  <div id = "vegetables"></div>
+
+  <button class = "collapsible"> Seafood 
+    <img class = "buttonIcons" src="/images/ingredients/Seafood/octopus.png" height="40px" width="40px">
+  </button>
+
+  <div id = "seafood"></div>
+
+  <button class = "collapsible"> Desserts 
+    <img class = "buttonIcons" src="/images/ingredients/Desserts/chocolate.png" height="40px" width="40px">
+  </button>
+
+  <div id = "desserts"></div>
+
+   <button class = "collapsible"> Dishes 
+    <img class = "buttonIcons" src="/images/ingredients/Dishes/sushi.png" height="40px" width="40px">
+  </button>
+
+  <div id = "dishes"></div>
+
+  <button class = "collapsible"> Other 
+    <img class = "buttonIcons" src="/images/ingredients/Other/eggs.png" height="40px" width="40px">
+  </button>
+
+  <div id = "other"></div>
+
+  </div>
+
+</div>
+
+  <div id = "container" style="position:absolute;overflow:hidden;top:110px;left:260px;bottom:36px;right:0px;background-image:url('/images/grid.gif');cursor:default;overflow:scroll;">
+
+  </div> 
+
+<div id = "changeTitle">
+  <form>
+
+  {% for xml in xmlData %}
+    <input type = "hidden" id = "idOfGraph" value="{{xml.id}}" name = "graphId" class="currentGraph">
+    <input type="hidden" value="{{xml.XMLGraph}}" id="openedGraphxml">
+    <input type="hidden" value="{{xml.title}}" id="openedGraphTitle">
+  {% endfor %}
+    
+    
+    <!--<button id = "currentTitle" type="text" name="currentTitle" data-toggle="modal" data-target="#saveTitleModal" > {{newGraphTitle}} </button>-->
+
+  </form>
+</div>
+
+
+<!-- The Modal -->
+  <div class="modal" id="saveAsModal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+      
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title">Save as</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        
+        <!-- Modal body -->
+        <div class="modal-body">
+          <input id = "saveAsTitle" type="text" placeholder="Name" name="saveAsTitle" maxlength = "50">
+
+        </div>
+        
+        <!-- Modal footer -->
+        <div class="modal-footer">
+        
+        <button type="button" class="btn btn-primary" data-dismiss="modal" id = saveName>Save</button>
+         
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+
+
+        </div>
+        
+      </div>
+    </div>
+  </div>
+
+<!-- The Modal -->
+  <div class="modal" id="openModal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+      
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title">Open Recipe</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        
+        <!-- Modal body -->
+        <div id = "loadAllTitles" class="modal-body">
+
+
+          <table id = "graphList" class = "table pure-table">
+
+          </table>
+
+
+        </div>
+        
+        <!-- Modal footer -->
+        
+      </div>
+    </div>
+  </div>
+
+  <!-- The Modal -->
+  <div class="modal" id="newModal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+      
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title">New Recipe</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        
+        <!-- Modal body -->
+        <div class="modal-body">
+          <input id = "openTitle" type="text" placeholder="Title" name="openTitle" maxlength = "50">
+        </div>
+        
+        <!-- Modal footer -->
+        <div class="modal-footer">
+        
+        <button class = "openFile btn btn-primary" type="button" data-dismiss="modal">Create</button>
+         
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+
+
+        </div>
+        
+      </div>
+    </div>
+  </div>
+
+  <!-- The Modal -->
+  <div class="modal" id="saveTitleModal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+      
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title">Save Recipe</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        
+        <!-- Modal body -->
+        <div class="modal-body">
+          <input id = "newTitle" type="text" placeholder="Name" name="newTitle" maxlength = "50">
+
+        </div>
+        
+        <!-- Modal footer -->
+        <div class="modal-footer">
+        
+        <button type="button" class="btn btn-primary" id = "saveNewTitle" data-dismiss="modal">Save</button>
+         
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+
+
+        </div>
+        
+      </div>
+    </div>
+  </div>
+
+  <!-- The Modal -->
+  <div class="modal" id="shareModal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+      
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title">Share Recipe</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        
+        <!-- Modal body -->
+        <div class="modal-body">
+
+            <h2 style="text-align: center;  font-family: Calibri, Candara, Segoe, Segoe UI, Optima, Arial, sans-serif; font-size: 20px; "> Recipe difficulty level: </h2>
+
+      <form method="POST" action="{% url 'home' %}" target="_blank">
+         {% csrf_token %}
+        <input type="hidden" name="currentGraphId">
+        <input type="hidden" name="rating">
+        <input type="hidden" name="sharedXMLData">
+            <section class='rating-widget'>
+              
+              <!-- Rating Stars Box -->
+              <div class='rating-stars text-center'>
+                <ul id='stars'>
+                  <li class='star' title='Easy' data-value='1'>
+                    <i class='fa fa-star fa-fw'></i>
+                  </li>
+                  <li class='star' title='Moderate' data-value='2'>
+                    <i class='fa fa-star fa-fw'></i>
+                  </li>
+                  <li class='star' title='Hard' data-value='3'>
+                    <i class='fa fa-star fa-fw'></i>
+                  </li>
+                  <li class='star' title='Challenging' data-value='4'>
+                    <i class='fa fa-star fa-fw'></i>
+                  </li>
+                  <li class='star' title='Professional' data-value='5'>
+                    <i class='fa fa-star fa-fw'></i>
+                  </li>
+                </ul>
+              </div>
+            
+            </section>
+
+            <input class = "shareElements" type="text" name="serve" required placeholder="Serves">
+            </br>
+            <input class = "shareElements" type="text" name="time" required placeholder="Time in minutes" maxlength="3">
+            </br>
+            <div class="text-center">
+              <p class="error" style="color: red; display: none;"> Please provide the recipe difficulty</p>
+            </div>
+        </div>
+        
+        <!-- Modal footer -->
+        <div class="modal-footer">
+        <button id = share class="btn btn-primary" type="submit" >Share</button>
+
+      </form> 
+
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+
+        </div>
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="confirm-delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+            
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" id="myModalLabel">Confirm Delete</h4>
+                </div>
+            
+                <div class="modal-body">
+                    <p>You are about to delete one track, this procedure is irreversible.</p>
+                    <p>Do you want to proceed?</p>
+                    <p class="debug-url"></p>
+                </div>
+                
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                    <a class="btn btn-danger btn-ok">Delete</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- The Modal -->
+  <div class="modal" id="help">
+    <div class="modal-dialog">
+      <div class="modal-content">
+      
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title">Help</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        
+        <!-- Modal body -->
+        <div class="modal-body">
+          <h4> What is Fastcook? </h4>
+          Fastcook is a web application which allows users to interact with the system to create a graphical flowchart that illustrates the instructions of preparing a certain meal. This application will contain images that will represent the different events for those instructions. The images will be connected to each other by arrows to show the sets of instructions as a graph.
+          </br>
+          </br>
+          <h4> What does each functionality represent? </h4>
+          <img src="/images/group.png"> (Un) Group - Select the ingredients (nodes), by holding ctrl or by highlighting all the elements. To ungroup, you select all and press the ungroup button.
+          </br>
+          <img src="/images/delete2.png"> Delete - Select the nodes and press the button to delete
+          </br>
+          <img src="/images/cut.png"> Cut - Select the node and press the button to cut which can be used to paste after
+          </br>
+          <img src="/images/copy.png"> Copy - Select the node and press the button to copy which can be used to paste after
+          </br>
+          <img src="/images/paste.png"> Paste - Paste the node you had cut/copied
+          </br>
+          <img src="/images/undo.png"> Undo - Press this button to undo
+          </br>
+          <img src="/images/redo.png"> Redo - Press this button to redo
+          </br>
+          <img src="/images/zoomin.gif"> Zoom in - Press this button to zoom in
+          </br>
+          <img src="/images/zoomout.gif"> Zoom out - Press this button to zoom out
+          </br>
+          </br>
+          <h4> Who created Fastcook? </h4>
+          Fastcook was created by Amair Naeem
+
+
+        </div>
+        
+        <!-- Modal footer -->
+        <div class="modal-footer">
+                 
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+
+
+        </div>
+        
+      </div>
+    </div>
+  </div>
+
+  <div id="myModal" class="modal fade">
+  <div class="modal-dialog modal-confirm">
+    <div class="modal-content">
+      <div class="modal-header">      
+        <h4 class="modal-title">Are you sure?</h4>  
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p>Do you really want to delete these records? This process cannot be undone.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-info" data-dismiss="modal">Cancel</button>
+        <button id = "confirmDelete" type="button" class="btn btn-danger" data-dismiss="modal">Delete</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="{% static 'fastcookapp/styleGraph.js' %}"></script> 
+
+<script src="{% static 'fastcookapp/mxgraph.min.js' %}"></script> 
+
+<script src="{% static 'fastcookapp/newGraph.js' %}"></script> 
+<script type="text/javascript">
+    mxBasePath = "{% static 'fastcookapp/mxgraph-master/mxgraph-master/javascript/src' %}";
+</script>
+<script src="{% static 'fastcookapp/mxgraph-master/mxgraph-master/javascript/mxClient.js' %}"></script>
+<script type="text/javascript">
+window.onload = function(){
+    main(document.getElementById("graphContainer"));
+}
+</script> 
+    
+</html>
+{% endblock %}

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script type="text/javascript";>
+	function main(container)
+	{
+		 // Checks if the browser is supported
+		if (!mxClient.isBrowserSupported())
+		{
+		    // Displays an error message if the browser is not supported.
+	        mxUtils.error('Browser is not supported!', 200, false);
+		}
+	}
+</script>
+  <title>js drag and drop</title>
+
+  <style type="text/css">
+
+
+  </style>
+
+
+
+  <script type = "text/javascript" src = "sample.js"> </script>
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script type="text/javascript">
+   mxBasePath = 'javascript/src';
+  </script>
+  <script type="text/javascript" src="javascript/src/js/mxClient.js"></script>
+  <link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.1/themes/base/jquery-ui.css"/>
+
+</head>
+<body>
+
+  <div class="dragdiv">
+
+  </div>
+
+<div style="position:relative" class="container">
+  <div class="dropped ui-draggable"></div>
+</div>
+
+</body>
+</html>

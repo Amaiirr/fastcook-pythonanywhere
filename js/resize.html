@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+
+  <style type="text/css">
+  
+  .ui-resizable-helper { border: 1px dotted gray; }
+  .div {
+    style="display:inline-block;
+}
+
+/*.drag {
+    cursor: move;
+    display:inline-block;
+}*/
+
+
+</style>
+    
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.1/themes/base/jquery-ui.css"/>
+
+<script>
+
+ 
+
+
+  $(function() {
+
+            $('.div').draggable();
+            $( ".drag" ).resizable({
+              animate: true
+            });
+
+          });
+
+</script>
+
+</head>
+
+<body>
+
+  <div class = div>
+    <img src="mypic.jpg" class="drag" height = 100px">
+  </div>
+
+
+</body>
+</html>
