@@ -1,5 +1,5 @@
 function loadStyleSheet(graph, sharedXml) {
-            
+
             var groupStyle = new Object();
             groupStyle[mxConstants.STYLE_SHAPE] = mxConstants.SHAPE_SWIMLANE;
             groupStyle[mxConstants.STYLE_PERIMETER] = mxPerimeter.RectanglePerimeter;
@@ -18,13 +18,13 @@ function loadStyleSheet(graph, sharedXml) {
             edge[mxConstants.STYLE_STROKEWIDTH] = '2';
             edge[mxConstants.STYLE_ROUNDED] = true;
             //edge[mxConstants.STYLE_EDGE] = mxEdgeStyle.OrthConnector;
-            
+
             var style = [];
             var test = [];
             var measurementStyle = [];
             var dir = "/loadIcons/";
             var fileextension = ".png";
-            
+
             $.ajax({
                 //This will retrieve the contents of the folder if the folder is configured as 'browsable'
                 type: "GET",
@@ -35,7 +35,7 @@ function loadStyleSheet(graph, sharedXml) {
                 console.log(data)
                 for (var i = 3; i >= 0; i--) {
                         style[i] = new Object();
-                        style[i][mxConstants.STYLE_SHAPE] = mxConstants.SHAPE_IMAGE;    
+                        style[i][mxConstants.STYLE_SHAPE] = mxConstants.SHAPE_IMAGE;
 
                         style[i][mxConstants.STYLE_IMAGE] = '/images/ingredients/Equipment/'+ data["equipment"][i] + "/";
                         style[i][mxConstants.STYLE_EDGE] = mxEdgeStyle.EntityRelation;
@@ -47,7 +47,7 @@ function loadStyleSheet(graph, sharedXml) {
                     for (var i = 4; i >= 0; i--) {
                         measurementStyle[i] = new Object();
                     }
-                    
+
                     measurementStyle[0][mxConstants.STYLE_IMAGE] = '/images/ingredients/Measurement/tablespoon.png/';
                     measurementStyle[1][mxConstants.STYLE_IMAGE] = '/images/ingredients/Measurement/teaspoon.png/';
                     measurementStyle[2][mxConstants.STYLE_IMAGE] = '/images/ingredients/Measurement/scoop.png/';
@@ -55,7 +55,7 @@ function loadStyleSheet(graph, sharedXml) {
                     measurementStyle[4][mxConstants.STYLE_IMAGE] = '/images/ingredients/Measurement/ruler.png/';
 
                     for (var i = 4; i >= 0; i--) {
-                        
+
                         measurementStyle[i][mxConstants.STYLE_SHAPE] = mxConstants.SHAPE_IMAGE;
                         measurementStyle[i][mxConstants.STYLE_EDGE] = mxEdgeStyle.EntityRelation;
                         measurementStyle[i][mxConstants.STYLE_VERTICAL_LABEL_POSITION] = mxConstants.ALIGN_BOTTOM;
@@ -149,7 +149,7 @@ function loadStyleSheet(graph, sharedXml) {
                     for (var i = 18; i >= 0; i--) {
                         style[i] = new Object();
                         style[i][mxConstants.STYLE_SHAPE] = mxConstants.SHAPE_IMAGE;
-                        style[i][mxConstants.STYLE_IMAGE] = '/images/ingredients/dishes/'+ data["dishes"][i] + "/";
+                        style[i][mxConstants.STYLE_IMAGE] = '/images/ingredients/Dishes/'+ data["dishes"][i] + "/";
                         style[i][mxConstants.STYLE_EDGE] = mxEdgeStyle.EntityRelation;
                         style[i][mxConstants.STYLE_VERTICAL_LABEL_POSITION] = mxConstants.ALIGN_BOTTOM;
                         style[i][mxConstants.STYLE_VERTICAL_ALIGN] = mxConstants.ALIGN_TOP;
@@ -159,7 +159,7 @@ function loadStyleSheet(graph, sharedXml) {
                     for (var i = 17; i >= 0; i--) {
                         style[i] = new Object();
                         style[i][mxConstants.STYLE_SHAPE] = mxConstants.SHAPE_IMAGE;
-                        style[i][mxConstants.STYLE_IMAGE] = '/images/ingredients/desserts/'+ data["desserts"][i] + "/";
+                        style[i][mxConstants.STYLE_IMAGE] = '/images/ingredients/Desserts/'+ data["desserts"][i] + "/";
                         style[i][mxConstants.STYLE_EDGE] = mxEdgeStyle.EntityRelation;
                         style[i][mxConstants.STYLE_VERTICAL_LABEL_POSITION] = mxConstants.ALIGN_BOTTOM;
                         style[i][mxConstants.STYLE_VERTICAL_ALIGN] = mxConstants.ALIGN_TOP;
@@ -202,6 +202,6 @@ function loadStyleSheet(graph, sharedXml) {
                 }
             });
 
-        
-                
+
+
         }

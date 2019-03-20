@@ -53,11 +53,11 @@ function hideOnClk(id){
       var onStar = 0;
 
       $(document).ready(function(){
-  
+
           /* 1. Visualizing things on Hover - See next part for action on click */
           $('#stars li').on('mouseover', function(){
             var onStar = parseInt($(this).data('value'), 10); // The star currently mouse on
-           
+
             // Now highlight all the stars that's not after the current hovered star
             $(this).parent().children('li.star').each(function(e){
               if (e < onStar) {
@@ -67,33 +67,33 @@ function hideOnClk(id){
                 $(this).removeClass('hover');
               }
             });
-            
+
           }).on('mouseout', function(){
             $(this).parent().children('li.star').each(function(e){
               $(this).removeClass('hover');
             });
           });
-          
-          
+
+
           /* 2. Action to perform on click */
           $('#stars li').on('click', function(){
             onStar = parseInt($(this).data('value'), 10); // The star currently selected
 
             // pass onstar to value of share.
             var stars = $(this).parent().children('li.star');
-            
+
             for (i = 0; i < stars.length; i++) {
               $(stars[i]).removeClass('selected');
             }
-            
+
             for (i = 0; i < onStar; i++) {
               $(stars[i]).addClass('selected');
             }
-            
-            
+
+
           });
-  
-  
+
+
     });
 
 
@@ -102,7 +102,7 @@ function hideOnClk(id){
         {
             this.images = [];
             var graph = state.view.graph;
-            
+
             // Icon1
             var img = mxUtils.createImage('/images/copy.png');
             img.setAttribute('title', 'Duplicate');
@@ -112,7 +112,7 @@ function hideOnClk(id){
             img.style.height = '16px';
             img.style.left = (state.x + state.width) + 'px';
             img.style.top = (state.y + state.height) + 'px';
-            
+
             mxEvent.addGestureListeners(img,
                 mxUtils.bind(this, function(evt)
                 {
@@ -122,10 +122,10 @@ function hideOnClk(id){
                     this.destroy();
                 })
             );
-            
+
             state.view.graph.container.appendChild(img);
             this.images.push(img);
-            
+
             // Delete
             var img = mxUtils.createImage('/images/delete2.png');
             img.setAttribute('title', 'Delete');
@@ -135,7 +135,7 @@ function hideOnClk(id){
             img.style.height = '16px';
             img.style.left = (state.x + state.width) + 'px';
             img.style.top = (state.y - 16) + 'px';
-            
+
             mxEvent.addGestureListeners(img,
                 mxUtils.bind(this, function(evt)
                 {
@@ -143,7 +143,7 @@ function hideOnClk(id){
                     mxEvent.consume(evt);
                 })
             );
-            
+
             mxEvent.addListener(img, 'click',
                 mxUtils.bind(this, function(evt)
                 {
@@ -152,7 +152,7 @@ function hideOnClk(id){
                     this.destroy();
                 })
             );
-            
+
             state.view.graph.container.appendChild(img);
             this.images.push(img);
         };
@@ -167,7 +167,7 @@ function hideOnClk(id){
                     img.parentNode.removeChild(img);
                 }
             }
-            
+
             this.images = null;
         };
 
@@ -175,7 +175,7 @@ function hideOnClk(id){
     var myEvent = window.attachEvent || window.addEventListener;
     var chkevent = window.attachEvent ? 'onbeforeunload' : 'beforeunload';
 
-    myEvent(chkevent, function(e) { 
+    myEvent(chkevent, function(e) {
         var confirmationMessage = 'Changes that you made may not be saved.';
         (e || window.event).returnValue = confirmationMessage;
         return confirmationMessage;
@@ -184,7 +184,7 @@ function hideOnClk(id){
     if (window.performance) {
       if (performance.navigation.type == 1) {
         window.location.href = "/profile/"
-      } 
+      }
     }
 
 function main()
@@ -240,9 +240,9 @@ function main()
                                 return;
                             }
                         }
-                        
+
                         var tmp = graph.view.getState(me.getCell());
-                        
+
                         // Ignores everything but vertices
                         if (graph.isMouseDown || (tmp != null && !graph.getModel().isVertex(tmp.cell)))
                         {
@@ -255,9 +255,9 @@ function main()
                             {
                                 this.dragLeave(me.getEvent(), this.currentState);
                             }
-                        
+
                             this.currentState = tmp;
-                        
+
                             if (this.currentState != null)
                             {
                                 this.dragEnter(me.getEvent(), this.currentState);
@@ -294,7 +294,7 @@ function main()
                 $(this).val($(this).val().replace(/\D/g, ''))
             })
 
-           
+
 
             $('#share').on('click',function(event){
                 var encoder = new mxCodec();
@@ -303,7 +303,7 @@ function main()
                 $('input[name="currentGraphId"]').val($("#idOfGraph").val())
                 $('input[name="rating"]').val(onStar)
                 $('input[name="sharedXMLData"]').val(sharedXMLData)
-                
+
                 if(onStar == 0)
                 {
                     event.preventDefault();
@@ -364,7 +364,7 @@ function main()
                 var seafood = document.getElementById('seafood')
                 var fastfood = document.getElementById('fastfood')
                 var other = document.getElementById('other')
-            
+
                 // Creates new toolbar without event processing
                 var toolbar = new mxToolbar(content);
                 toolbar.enabled = false
@@ -426,7 +426,7 @@ function main()
                     }
                   });
                 }
-                
+
                 // Creates the div for the graph
                 /*container = document.createElement('div');
                 container.style.position = 'absolute';
@@ -436,7 +436,7 @@ function main()
                 container.style.right = '0px';
                 container.style.bottom = '0px';
                 container.style.background = 'url("/images/grid.gif")';*/
-                
+
                 var diagramContainerClass = document.getElementsByClassName("diagramContainer")
                 var diagramContainer = diagramContainerClass[0]
 
@@ -465,7 +465,7 @@ function main()
                 };*/
 
 
-                
+
                 // Workaround for Internet Explorer ignoring certain styles
                 if (mxClient.IS_QUIRKS)
                 {
@@ -476,16 +476,16 @@ function main()
 
                 //graph.setDropEnabled(false);
 
-    
+
                  var undoManager = new mxUndoManager();
-                
+
                 var listener = function(sender, evt)
                 {
                     undoManager.undoableEditHappened(evt.getProperty('edit'));
                 };
 
                 graph.getModel().addListener(mxEvent.UNDO, listener);
-                
+
                 graph.getView().addListener(mxEvent.UNDO, listener);
 
 
@@ -496,9 +496,9 @@ function main()
                     menu.addItem('Undo', null, function()
                     {
                         undoManager.undo();
-                
+
                     });
-                    
+
                     menu.addItem('Redo', null, function()
                     {
                         undoManager.redo();
@@ -506,7 +506,7 @@ function main()
 
 
                     menu.addSeparator();
-                                        
+
                     menu.addItem('Select vertices', null, function()
                     {
                         graph.selectVertices();
@@ -517,7 +517,7 @@ function main()
                         graph.selectAll();
                     });
 
-                
+
                 };
 
 
@@ -531,7 +531,7 @@ function main()
                   if (graph.isEnabled())
                   {
                     graph.removeCells();
-                  }     
+                  }
 
                 });
 
@@ -543,16 +543,16 @@ function main()
                         graph.removeCells();
                     }
                 });
-                
+
                 // Matches DnD inside the graph
                 mxDragSource.prototype.getDropTarget = function(graph, x, y)
                 {
-                    var cell = graph.getCellAt(x, y);                    
+                    var cell = graph.getCellAt(x, y);
                     if (!graph.isValidDropTarget(cell))
                     {
                         cell = null;
                     }
-                    
+
                     return cell;
                 };
 
@@ -598,7 +598,7 @@ function main()
 
                 // Sets the graph container and configures the editor
                 editor.setGraphContainer(container);
-                
+
                 // Defines the default group to be used for grouping. The
                 // default group is a field in the mxEditor instance that
                 // is supposed to be a cell which is cloned for new cells.
@@ -615,7 +615,7 @@ function main()
                 {
                     return this.isSwimlane(cell);
                 };
-                
+
                 // Disables drilling into non-swimlanes.
                 graph.isValidRoot = function(cell)
                 {
@@ -633,7 +633,7 @@ function main()
                 graph.getLabel = function(cell)
                 {
                     var tmp = mxGraph.prototype.getLabel.apply(this, arguments); // "supercall"
-                    
+
                     if (this.isCellLocked(cell))
                     {
                         // Returns an empty label but makes sure an HTML
@@ -644,17 +644,17 @@ function main()
                     else if (this.isCellCollapsed(cell))
                     {
                         var index = tmp.indexOf('</h1>');
-                        
+
                         if (index > 0)
                         {
                             tmp = tmp.substring(0, index+5);
                         }
                     }
-                    
+
                     return tmp;
                 }*/
 
-        
+
                 // To disable the folding icon, use the following code:
                 /*graph.isCellFoldable = function(cell)
                 {
@@ -704,14 +704,14 @@ function main()
 
 
 
-                
+
                 topToolbar.appendChild(spacer.cloneNode(true));
 
 
 
 
                 addToolbarButton(editor, topToolbar, 'groupOrUngroup', '(Un)group', '/images/group.png');
-                
+
                 // Defines a new action for deleting or ungrouping
                 editor.addAction('groupOrUngroup', function(editor, cell)
                 {
@@ -727,20 +727,20 @@ function main()
                 });
 
                 addToolbarButton(editor, topToolbar, 'delete', 'Delete', '/images/delete2.png');
-                
+
                 spacer.style.paddingRight = '40px';
                 topToolbar.appendChild(spacer.cloneNode(true));
 
-                
+
                 addToolbarButton(editor, topToolbar, 'cut', 'Cut', '/images/cut.png');
                 addToolbarButton(editor, topToolbar, 'copy', 'Copy', '/images/copy.png');
                 addToolbarButton(editor, topToolbar, 'paste', 'Paste', '/images/paste.png');
 
                 topToolbar.appendChild(spacer.cloneNode(true));
-                
+
                 addToolbarButton(editor, topToolbar, 'undo', '', '/images/undo.png');
                 addToolbarButton(editor, topToolbar, 'redo', '', '/images/redo.png');
-                
+
                 topToolbar.appendChild(spacer.cloneNode(true));
 
                 addToolbarButton(editor, topToolbar, 'zoomIn','', '/images/zoomin.gif')
@@ -750,7 +750,7 @@ function main()
                 {
                     var vertex = new mxCell(label, new mxGeometry(0, 0, w, h), style);
                     vertex.setVertex(true);
-                
+
                     addToolbarItem(graph, toolbar, vertex, icon);
                 };
 
@@ -758,17 +758,17 @@ function main()
                 {
                     var vertex = new mxCell(label, new mxGeometry(0, 0, w, h), style);
                     vertex.setVertex(true);
-                
+
                     addToolbarItem(graph, measurementToolbar, vertex, icon);
                 };
 
-                
+
 
                 var addBerriesVertex = function(label, icon, w, h, style)
                 {
                     var vertex = new mxCell(label, new mxGeometry(0, 0, w, h), style);
                     vertex.setVertex(true);
-                
+
                     addToolbarItem(graph, berriesToolbar, vertex, icon);
                 };
 
@@ -777,7 +777,7 @@ function main()
                 {
                     var vertex = new mxCell(label, new mxGeometry(0, 0, w, h), style);
                     vertex.setVertex(true);
-                
+
                     addToolbarItem(graph, dairiesToolbar, vertex, icon);
                 };
 
@@ -785,7 +785,7 @@ function main()
                 {
                     var vertex = new mxCell(label, new mxGeometry(0, 0, w, h), style);
                     vertex.setVertex(true);
-                
+
                     addToolbarItem(graph, dessertToolbar, vertex, icon);
                 };
 
@@ -793,7 +793,7 @@ function main()
                 {
                     var vertex = new mxCell(label, new mxGeometry(0, 0, w, h), style);
                     vertex.setVertex(true);
-                
+
                     addToolbarItem(graph, dishesToolbar, vertex, icon);
                 };
 
@@ -801,7 +801,7 @@ function main()
                 {
                     var vertex = new mxCell(label, new mxGeometry(0, 0, w, h), style);
                     vertex.setVertex(true);
-                
+
                     addToolbarItem(graph, fastfoodToolbar, vertex, icon);
                 };
 
@@ -809,7 +809,7 @@ function main()
                 {
                     var vertex = new mxCell(label, new mxGeometry(0, 0, w, h), style);
                     vertex.setVertex(true);
-                
+
                     addToolbarItem(graph, fruitsToolbar, vertex, icon);
                 };
 
@@ -817,7 +817,7 @@ function main()
                 {
                     var vertex = new mxCell(label, new mxGeometry(0, 0, w, h), style);
                     vertex.setVertex(true);
-                
+
                     addToolbarItem(graph, meatToolbar, vertex, icon);
                 };
 
@@ -826,7 +826,7 @@ function main()
                 {
                     var vertex = new mxCell(label, new mxGeometry(0, 0, w, h), style);
                     vertex.setVertex(true);
-                
+
                     addToolbarItem(graph, nutToolbar, vertex, icon);
                 };
 
@@ -834,7 +834,7 @@ function main()
                 {
                     var vertex = new mxCell(label, new mxGeometry(0, 0, w, h), style);
                     vertex.setVertex(true);
-                
+
                     addToolbarItem(graph, otherToolbar, vertex, icon);
                 };
 
@@ -842,7 +842,7 @@ function main()
                 {
                     var vertex = new mxCell(label, new mxGeometry(0, 0, w, h), style);
                     vertex.setVertex(true);
-                
+
                     addToolbarItem(graph, seafoodToolbar, vertex, icon);
                 };
 
@@ -850,7 +850,7 @@ function main()
                 {
                     var vertex = new mxCell(label, new mxGeometry(0, 0, w, h), style);
                     vertex.setVertex(true);
-                
+
                     addToolbarItem(graph, vegetablesToolbar, vertex, icon);
                 };
 
@@ -861,8 +861,8 @@ function main()
 
                 var addGeneralVertex = function(icon,w,h,style, value)
                 {
-                    
-                    
+
+
                         var vertex = new mxCell(null, new mxGeometry(0, 0, w, h), style);
 
                         //graph.setConnectable(false)
@@ -872,7 +872,7 @@ function main()
 
                         addToolbarItem(graph, generalToolbar, vertex, icon);
 
-                    
+
 
                 }
 
@@ -883,7 +883,7 @@ function main()
                 //outln.outline.setHtmlLabels(true);
 
 
-                
+
             }
 
 
@@ -906,7 +906,7 @@ function main()
 
                     return null;
                 };*/
-                
+
 
                 $(document).ready(function(){
                     $('#loadAllTitles').on('click','.openGraph' ,function(event){
@@ -919,7 +919,7 @@ function main()
 
 
                         $.ajax({
-                    
+
                         type: "GET",
                         url: openUrl,
                         dataType: 'text',
@@ -943,16 +943,16 @@ function main()
                             $("#idOfGraph").val(id)
 
 
-                            
+
                         }
                     });
 
 
 
-      
+
                     })
                 });
-                    
+
 
                 $(document).ready(function(){
                     $('#saveNewTitle').on('click',function(event){
@@ -971,14 +971,14 @@ function main()
                             data: {
                             'newTitle': title,
                             'currentTitle': currentTitle,
-                            'xml': xml, 
+                            'xml': xml,
                             'graphId': graphId
                             },
                             headers:{
                                 "X-CSRFToken": csrftoken
                                 },
                             success: function(data){
-                                
+
                                 //console.log($(".openGraph").val())
 
                                 parseData = JSON.parse(data)
@@ -986,7 +986,7 @@ function main()
                                 if(parseData["overwrite"]){
 
                                     alert(title + " already exists")
-                                    
+
                                 }
 
                                 else{
@@ -996,8 +996,8 @@ function main()
 
 
                                     $('.currentGraph').each(function(i, obj){
-                                        
-                                            
+
+
                                         $('.openGraph').each(function(i,obj){
                                             if($(this).val() == currentTitle){
                                                 $(this).val(title);
@@ -1005,7 +1005,7 @@ function main()
 
                                         })
 
-                                        
+
                                     })
 
                                 }
@@ -1013,18 +1013,18 @@ function main()
                             },
 
                         });
-      
+
                     })
                 });
 
                 //Delete
 
-               
+
                                         //$('#confirmDelete').click(function () {
 
                     $('#loadAllTitles').on('click','.deleteGraph' ,function(event){
 
-                            
+
                                 var csrftoken = getCookie('csrftoken');
                                 event.preventDefault();
                                 var id = $(this).attr('id');
@@ -1034,11 +1034,11 @@ function main()
                                 console.log(tr)
                                 $.ajax({
                                     type: "DELETE",
-                                    url: id, 
+                                    url: id,
                                     headers:{
                                             "X-CSRFToken": csrftoken
                                             },
-                                    success: 
+                                    success:
 
                                     function(data){
 
@@ -1048,21 +1048,21 @@ function main()
                                         {
                                             $(window).off('beforeunload');
                                             window.location.href="/profile/"
-                                            
+
                                         }
 
                                     }
 
 
                                 })
-                            
-                        
+
+
                     //});
 
                 });
 
 
-               
+
                 //open xml buttons
                 $(document).ready(function(){
                     $('#openXML').on('click',function(event){
@@ -1086,7 +1086,7 @@ function main()
 
                                 /*for (var i = length - 1; i >= 0; i--) {
                                     /*var pk = "/openGraph/" + json[i]['pk']
-                                    var title = json[i]['fields']['title']                           
+                                    var title = json[i]['fields']['title']
                                     myButton="<input type=\"button\" class = \"openGraph\" value=\""+title+"\" id="+pk+"/\>";
 
                                 }*/
@@ -1104,7 +1104,7 @@ function main()
 
 
 
-                                
+
                                  if ($("#loadAllTitles").find('#' + $.escapeSelector(pkTitle + '/')).length == 0)
                                     $("#graphList").append("<tr> <td>" + titleButton + "</td> </tr>") //<td>" + "</td> <td>" + deleteButton + "</td> </tr>")
 
@@ -1112,7 +1112,7 @@ function main()
 
                             }
                         });
-      
+
                     })
                 });
 
@@ -1120,10 +1120,10 @@ function main()
                 $('#share').on('click',function(event){
                     var encoder = new mxCodec();
                     var node = encoder.encode(graph.getModel());
-                    //var xml = mxUtils.getPrettyXml(node); 
+                    //var xml = mxUtils.getPrettyXml(node);
                     xml = mxUtils.getXml(node);
 
-      
+
                     })
 
 
@@ -1137,7 +1137,7 @@ function main()
                         console.log(xml)
                         var csrftoken = getCookie('csrftoken');
                         var title = $('#openTitle').val()
-                        
+
                         $.ajax({
                             type: "POST",
                             url: "/saveTitle/",
@@ -1150,11 +1150,11 @@ function main()
                                 "X-CSRFToken": csrftoken
                             },
                             success: function(data){
-                                    
+
                                     parseData = JSON.parse(data)
                                     if(parseData["overwrite"]){
                                         alert(title+ " is already in use")
-                                        
+
                                     }
                                     else{
                                         $("#idOfGraph").val(parseData["id"])
@@ -1165,30 +1165,30 @@ function main()
                                     }
                                 },
                         });
-      
+
                     })
                 });
 
 
-               
+
                 //var button = mxUtils.button('Save', function()
                 $('.dropdown-menu').on('click','#saveButton' ,function(event){
-                
+
                     //var url = "{%url'login'%}"
                     //var url = "{% url 'myapp:productdetail' %}";
                     //location.href = '/saveData/'
                     var encoder = new mxCodec();
                     var node = encoder.encode(graph.getModel());
-                    //var xml = mxUtils.getPrettyXml(node); 
+                    //var xml = mxUtils.getPrettyXml(node);
                     var xml = mxUtils.getXml(node);
                     var csrftoken = getCookie('csrftoken');
                     console.log("test" + $("#idOfGraph").val())
 
                     $.ajax({
-        
+
                         type: "POST",
                         url: "/overwrite/",
-                        data: { 
+                        data: {
                             "xml": xml,
                             "title": $('#currentTitle').val(),
                             "graphId": $("#idOfGraph").val()
@@ -1218,7 +1218,7 @@ function main()
                                         $.ajax({
                                         type: "POST",
                                         url: "/saveData/",
-                                        data: { 
+                                        data: {
                                             "xml": xml,
                                             "title": $('#currentTitle').val()
                                             },
@@ -1250,18 +1250,18 @@ function main()
                             //console.log("graph model " + graph.getModel())
                             dec.decode(node, graph.getModel());
 
-                            
+
                         }
                     });
 
                 });
 
-                $("#saveName").click(function (event) 
+                $("#saveName").click(function (event)
                 {
                     var csrftoken = getCookie('csrftoken');
                     var encoder = new mxCodec();
                     var node = encoder.encode(graph.getModel());
-                    //var xml = mxUtils.getPrettyXml(node); 
+                    //var xml = mxUtils.getPrettyXml(node);
                     xml = mxUtils.getXml(node);
                     var csrftoken = getCookie('csrftoken');
                     var title = $('#saveAsTitle').val()
@@ -1299,112 +1299,112 @@ function main()
 
                 //creates an undoManager object that allows users to be able to undo and redo
 
-               
 
-                //addVertex("300g",'/images/icons/flour.png', 120, 160, 'rounded0');   
+
+                //addVertex("300g",'/images/icons/flour.png', 120, 160, 'rounded0');
                 //addVertex(null,'/images/icons/whisk.png', 100, 40, 'rounded3');
 
                 $.ajax({
                 //This will retrieve the contents of the folder if the folder is configured as 'browsable'
-                    
+
                     url: "/loadIcons/",
                     success: function (data) {
                         //console.log(data["images"][i])
-                            addMeasurementVertex("1 tbsp", '/images/ingredients/measurement/tablespoon.png/', 60,80, 'measurement0')
-                            addMeasurementVertex("1 tsp", '/images/ingredients/measurement/teaspoon.png/', 60,80, 'measurement1')
-                            addMeasurementVertex("1 scoop", '/images/ingredients/measurement/scoop.png/', 60,80, 'measurement2')
-                            addMeasurementVertex("1 cup", '/images/ingredients/measurement/cup.png/', 60,80, 'measurement3')
-                            addMeasurementVertex("1 inch", '/images/ingredients/measurement/ruler.png/', 60,80, 'measurement4')
+                            addMeasurementVertex("1 tbsp", '/images/ingredients/Measurement/tablespoon.png/', 60,80, 'measurement0')
+                            addMeasurementVertex("1 tsp", '/images/ingredients/Measurement/teaspoon.png/', 60,80, 'measurement1')
+                            addMeasurementVertex("1 scoop", '/images/ingredients/Measurement/scoop.png/', 60,80, 'measurement2')
+                            addMeasurementVertex("1 cup", '/images/ingredients/Measurement/cup.png/', 60,80, 'measurement3')
+                            addMeasurementVertex("1 inch", '/images/ingredients/Measurement/ruler.png/', 60,80, 'measurement4')
 
-                            
+
 
                             $( "#searchEngine" ).autocomplete({
                                   source: data["allFiles"]
                                 });
-  
+
 
                             var addEquipmentVertex = function(label, icon, w, h, style)
                             {
                                 var vertex = new mxCell(label, new mxGeometry(0, 0, w, h), style);
                                 vertex.setVertex(true);
-                
+
                                 addToolbarItem(graph, equipmentToolbar, vertex, icon);
                             };
 
                             for (var i = 3; i >= 0; i--) {
-                                
-                                addEquipmentVertex("60 Minutes",'/images/ingredients/Equipment/'+ data["equipment"][i] + "/", 60, 80, 'equipment'+i); 
+
+                                addEquipmentVertex("60 Minutes",'/images/ingredients/Equipment/'+ data["equipment"][i] + "/", 60, 80, 'equipment'+i);
 
                             }
 
                             for (var i = 4; i >= 0; i--) {
-                                
-                                addVertex("300g",'/images/ingredients/Bakery/'+ data["bakery"][i] + "/", 60, 80, 'rounded'+i); 
+
+                                addVertex("300g",'/images/ingredients/Bakery/'+ data["bakery"][i] + "/", 60, 80, 'rounded'+i);
 
                             }
 
                             for (var i = 3; i >= 0; i--) {
-                                
-                                addBerriesVertex("300g",'/images/ingredients/Berries/'+ data["berries"][i] + "/", 60, 80, 'berries'+i); 
+
+                                addBerriesVertex("300g",'/images/ingredients/Berries/'+ data["berries"][i] + "/", 60, 80, 'berries'+i);
 
                             }
 
                             for (var i = 2; i >= 0; i--) {
-                                
-                                addDairiesVertex("300g",'/images/ingredients/Dairies/'+ data["dairies"][i] + "/", 60, 80, 'dairies'+i); 
+
+                                addDairiesVertex("300g",'/images/ingredients/Dairies/'+ data["dairies"][i] + "/", 60, 80, 'dairies'+i);
 
                             }
 
-                    
+
                             for (var i = 19; i >= 0; i--) {
-                                
-                                addFruitsVertex("300g",'/images/ingredients/Fruits/'+ data["fruits"][i] + "/", 60, 80, 'fruits'+i); 
+
+                                addFruitsVertex("300g",'/images/ingredients/Fruits/'+ data["fruits"][i] + "/", 60, 80, 'fruits'+i);
 
                             }
 
                             for (var i = 8; i >= 0; i--) {
-                                
-                                addMeatVertex("300g",'/images/ingredients/Meat/'+ data["meat"][i] + "/", 60, 80, 'meat'+i); 
+
+                                addMeatVertex("300g",'/images/ingredients/Meat/'+ data["meat"][i] + "/", 60, 80, 'meat'+i);
 
                             }
 
                             for (var i = 3; i >= 0; i--) {
-                                
-                                addNutVertex("300g",'/images/ingredients/Nut/'+ data["nut"][i] + "/", 60, 80, 'nut'+i); 
+
+                                addNutVertex("300g",'/images/ingredients/Nut/'+ data["nut"][i] + "/", 60, 80, 'nut'+i);
 
                             }
 
                             for (var i = 13; i >= 0; i--) {
-                                
-                                addOtherVertex("300g",'/images/ingredients/other/'+ data["other"][i] + "/", 60, 80, 'other'+i); 
+
+                                addOtherVertex("300g",'/images/ingredients/other/'+ data["other"][i] + "/", 60, 80, 'other'+i);
 
                             }
 
                             for (var i = 4; i >= 0; i--) {
-                                
-                                addSeafoodVertex("300g",'/images/ingredients/Seafood/'+ data["seafood"][i] + "/", 60, 80, 'seafood'+i); 
+
+                                addSeafoodVertex("300g",'/images/ingredients/Seafood/'+ data["seafood"][i] + "/", 60, 80, 'seafood'+i);
 
                             }
 
                             for (var i = 26; i >= 0; i--) {
-                                
-                                addVegetablesVertex("300g",'/images/ingredients/Vegetables/'+ data["vegetables"][i] + "/", 60, 80, 'vegetables'+i); 
+
+                                addVegetablesVertex("300g",'/images/ingredients/Vegetables/'+ data["vegetables"][i] + "/", 60, 80, 'vegetables'+i);
 
                             }
 
                            for (var i = 18; i >= 0; i--) {
-                                
-                                addDishesVertex("300g",'/images/ingredients/Dishes/'+ data["dishes"][i] + "/", 60, 80, 'dishes'+i); 
+
+                                addDishesVertex("300g",'/images/ingredients/Dishes/'+ data["dishes"][i] + "/", 60, 80, 'dishes'+i);
 
                             }
 
                            for (var i = 17; i >= 0; i--) {
-                                
-                                addDessertsVertex("300g",'/images/ingredients/Desserts/'+ data["desserts"][i] + "/", 60, 80, 'desserts'+i); 
+
+                                addDessertsVertex("300g",'/images/ingredients/Desserts/'+ data["desserts"][i] + "/", 60, 80, 'desserts'+i);
 
                             }
 
-                        }   
+                        }
                 });
 
 
@@ -1416,12 +1416,12 @@ function main()
                 //addVertex(null,'/images/actor.gif', 30, 40, 'shape=actor');
 
 
-                
 
-            
+
+
 
                 $.ajax({
-                        
+
                             type: "GET",
                             url: "/home/",
                             dataType: 'text',
@@ -1430,7 +1430,7 @@ function main()
                                 var items = json["title"]
                                 var parseItems = JSON.parse(items)
                                 var length = parseItems.length
-                                
+
 
                                 console.log(length)
 
@@ -1457,7 +1457,7 @@ function main()
 
                                     $("#graphList").append("<tr> <td>" + titleButton + "</td> </tr>")// + "</td> <td>" + deleteButton + "</td> </tr>")
 
-                                    
+
                                      //if ($("#loadAllTitles").find('#' + $.escapeSelector(pkTitle + '/')).length == 0)
                                     /*$("#graphButton").append("<td> <input type = button class = openGraph \
                                         value =" + title + "id=" + id + "> </td> \
@@ -1479,17 +1479,17 @@ function main()
                                 //console.log("dec " + dec)
                                 //console.log("graph model " + graph.getModel())
                                 dec.decode(node, graph.getModel());
-                                
+
                                 //graph.fit()*/
                             }
                         });
 
-                        $(document).ready(function(){ 
+                        $(document).ready(function(){
                         $('#searchSubmit').on('click',function(event){
                             event.preventDefault();
-                            
 
-                           $.ajax({    
+
+                           $.ajax({
                                     type: "POST",
                                     url: /search/,
                                     dataType: 'text',
@@ -1500,13 +1500,13 @@ function main()
                                         'searchEngine': $('#searchEngine').val()
                                         },
                                     success: function(data){
-                                            
+
 
 
                                             document.getElementById("noResults").innerHTML = "";
                                             var json = JSON.parse(data)
                                             console.log(json)
-                                            
+                                            //
                                             //console.log(length)
                                             //console.log(directory)
                                             //alert("test")
@@ -1514,13 +1514,13 @@ function main()
                                             console.log(result)
 
 
-                                           
+
 
                                             var addSearchVertex = function(label, icon, w, h, style)
                                             {
                                                 var vertex = new mxCell(label, new mxGeometry(0, 0, w, h), style);
                                                 vertex.setVertex(true);
-                                            
+
                                                 addToolbarItem(graph, toolbarsearchEngine, vertex, icon);
 
 
@@ -1531,12 +1531,16 @@ function main()
                                                 var length = json[0]['length']
                                                 var directory = json[0]['file_direc']
 
-                                                console.log(length)
-
+                                                //console.log(length)
+                                                //console.log(directory)
+                                                ///home/fastcookapp/fastcook-pythonanywhere/fastcookapp/images/ingredients/Berries/strawberry.png
                                                 document.getElementById("noResults").innerHTML = "";
-                                                var dir = directory.replace(/fastcookapp/,'');
+                                                var dir = directory.replace('home/fastcookapp/fastcook-pythonanywhere/fastcookapp/','');
+                                                console.log(dir)
                                                 var cat = dir.split('/')[3]
+                                                console.log("category " + cat)
                                                 var ingredient = dir.split('/')[4]
+                                                console.log("ingredient " + ingredient)
                                                 ingredient = ingredient.replace('.png','')
                                                 var catLowerCase = cat.toLowerCase()
 
@@ -1546,7 +1550,7 @@ function main()
                                                     addSearchVertex("60 minutes", dir, 60,80, catLowerCase+length)
 
                                                 }
-                                                    
+
 
                                                 else if(ingredient == "tablespoon"){
                                                     clearToolbar()
@@ -1582,7 +1586,7 @@ function main()
                                                     console.log(catLowerCase+length)
                                                     clearToolbar()
                                                     addSearchVertex("300g", dir, 60,80, catLowerCase+length)
-                                                    
+
                                                     //toolbarsearchEngine.destroy()
                                                 }
                                         }
@@ -1596,15 +1600,15 @@ function main()
 
                                         }
 
-                                            
+
                                     }
                             });
 
-                            
+
                         });
 
 
-                         
+
                      });
 
                                 $(document).ready(function()
@@ -1613,7 +1617,7 @@ function main()
                                                         clearToolbar()
 
 
-                                                }) 
+                                                })
                                             })
 
 
@@ -1621,7 +1625,7 @@ function main()
 
             //opens graph
             //alert($("#openedGraphxml").val())
-           
+
 
         }
 
@@ -1640,7 +1644,7 @@ function main()
                 var vertex = graph.getModel().cloneCell(prototype);
                 vertex.geometry.x = pt.x;
                 vertex.geometry.y = pt.y;
-                
+
                 graph.setSelectionCells(graph.importCells([vertex], 0, 0, cell));
 
             }
@@ -1652,7 +1656,7 @@ function main()
         }
 
         function post(path, params, method) {
-            
+
             method = method || "post"; // Set method to post by default if not specified.
 
             // The rest of this code assumes you are not using a library.
@@ -1697,7 +1701,7 @@ function main()
         }
 
         /*function loadStyleSheet(graph) {
-            
+
             var groupStyle = new Object();
             groupStyle[mxConstants.STYLE_SHAPE] = mxConstants.SHAPE_SWIMLANE;
             groupStyle[mxConstants.STYLE_PERIMETER] = mxPerimeter.RectanglePerimeter;
@@ -1732,7 +1736,7 @@ function main()
 
                     for (var i = 3; i >= 0; i--) {
                         style[i] = new Object();
-                        style[i][mxConstants.STYLE_SHAPE] = mxConstants.SHAPE_IMAGE;    
+                        style[i][mxConstants.STYLE_SHAPE] = mxConstants.SHAPE_IMAGE;
                         style[i][mxConstants.STYLE_IMAGE] = '/images/ingredients/Equipment/'+ data["equipment"][i] + "/";
                         style[i][mxConstants.STYLE_EDGE] = mxEdgeStyle.EntityRelation;
                         style[i][mxConstants.STYLE_VERTICAL_LABEL_POSITION] = mxConstants.ALIGN_BOTTOM;
@@ -1743,7 +1747,7 @@ function main()
                     for (var i = 4; i >= 0; i--) {
                         measurementStyle[i] = new Object();
                     }
-                    
+
                     measurementStyle[0][mxConstants.STYLE_IMAGE] = '/images/ingredients/Measurement/tablespoon.png/';
                     measurementStyle[1][mxConstants.STYLE_IMAGE] = '/images/ingredients/Measurement/teaspoon.png/';
                     measurementStyle[2][mxConstants.STYLE_IMAGE] = '/images/ingredients/Measurement/scoop.png/';
@@ -1751,7 +1755,7 @@ function main()
                     measurementStyle[4][mxConstants.STYLE_IMAGE] = '/images/ingredients/Measurement/ruler.png/';
 
                     for (var i = 4; i >= 0; i--) {
-                        
+
                         measurementStyle[i][mxConstants.STYLE_SHAPE] = mxConstants.SHAPE_IMAGE;
                         measurementStyle[i][mxConstants.STYLE_EDGE] = mxEdgeStyle.EntityRelation;
                         measurementStyle[i][mxConstants.STYLE_VERTICAL_LABEL_POSITION] = mxConstants.ALIGN_BOTTOM;
@@ -1902,7 +1906,7 @@ function main()
 
                 style2[mxConstants.STYLE_SHAPE] = mxConstants.SHAPE_IMAGE;
                 style2[mxConstants.STYLE_IMAGE] = '/images/icons/whisk.png';
-                style2[mxConstants.STYLE_EDGE] = mxEdgeStyle.EntityRelation;                
+                style2[mxConstants.STYLE_EDGE] = mxEdgeStyle.EntityRelation;
 
                 //graph.getStylesheet().putCellStyle('rounded2', style);
 
@@ -1932,7 +1936,7 @@ function main()
             dec1.decode(node1, graph.getModel());
         }
 
-        
+
         function addToolbarButton(editor, topToolbar, action, label, image, isTransparent)
         {
             var button = document.createElement('button');
@@ -1976,10 +1980,10 @@ function main()
             //toolbarsearchEngine.enabled = false
             var mxToolbarModes = $('#searchToolbar').find('.mxToolbarMode')
             Array.prototype.forEach.call( mxToolbarModes, function( node ) {
-                
+
                     //console.log(mxToolbarModes[0])
                     node.parentNode.removeChild( node );
-                
+
                 //node.parentNode.removeChild( node );
                 //mxToolbarModes[0].parentNode.removeChild(mxToolbarModes[0]);
 

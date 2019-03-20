@@ -37,7 +37,7 @@ class MemberViewSet(viewsets.ModelViewSet):
     # API endpoint for listing and creating members
     queryset = Member.objects.order_by('username')
     serializer_class = MemberSerializer
-        
+
 
 # Decorator to test if user logs in
 def loggedin(view):
@@ -74,7 +74,7 @@ def home(request,user):
     graphTitle = XMLGraph.objects.filter(user=user).values('title','id')
     graph  = XMLGraph.objects.filter(user=user).values('XMLGraph')
 	#graphTitle = XMLGraph.objects.filter(user=user)
-    
+
     #print(graphTitle)
 
     #member = Member.objects.get(username=user)
@@ -95,7 +95,7 @@ def home(request,user):
     logout(request, *args, **kwargs)
     return redirect("login")"""
 
-# render logout page 
+# render logout page
 @loggedin
 def logout(request, user):
     request.session.flush()
@@ -116,18 +116,18 @@ def createNewGraph(request,user):
 @loggedin
 def profile(request, user):
     if request.method == 'POST':
-        
+
         graphTitle22 = request.POST['graphTitle22']
-        
+
         if XMLGraph.objects.filter(title=graphTitle22, user=user).exists():
             graphTitle = XMLGraph.objects.filter(user=user).values('title','id', 'created_at')
             graph  = XMLGraph.objects.filter(user=user).values('XMLGraph')
             #messages.add_message(request, messages.INFO, str(graphTitle22) + ' already exists, please use another title')
 
             return JsonResponse({'overwrite' : True})
-            """return render(request, 'fastcookapp/profile.html', {'xml': json.dumps(str(graph)), 'title':graphTitle, 
+            """return render(request, 'fastcookapp/profile.html', {'xml': json.dumps(str(graph)), 'title':graphTitle,
                 'error': str(graphTitle22) + ' already exists, please use another title', 'overwrite': True})"""
-        
+
         saveNewGraph = XMLGraph.objects.create(user=user, title=graphTitle22)
 
         return JsonResponse({'id': saveNewGraph.id, 'overwrite' : False})
@@ -137,10 +137,10 @@ def profile(request, user):
         #graph  = XMLGraph.objects.filter(user=user).values('XMLGraph')
         """xml = XMLGraph.objects.filter(id = saveNewGraph.id).only('id', 'title', 'XMLGraph')
         return render(request, 'fastcookapp/index.html', {'xmlData': xml, 'overwrite': False})"""
-    
+
     graphTitle = XMLGraph.objects.filter(user=user).values('title','id', 'created_at')
     graph  = XMLGraph.objects.filter(user=user).values('XMLGraph')
-    
+
     return render(request, 'fastcookapp/profile.html', {'xml': json.dumps(str(graph)), 'title':graphTitle,  'overwrite': False})
 
 # Register view displays login when successful details have been passed
@@ -157,14 +157,14 @@ def register(request):
             print("test1")
             return render(request, 'fastcookapp/register.html')
 
-            
+
         # Password validation
         if password and re_password:
             if password != re_password:
                 #return error if passwords do not match
                 messages.add_message(request, messages.INFO, "The two password fields do not match.")
                 return render(request, 'fastcookapp/register.html')
-                
+
             else:
                 #print("Username: " + str(username) + "Password: " + str(password))
                 user = Member(username = username, email = email)
@@ -172,7 +172,7 @@ def register(request):
 
                 try:
                     user.save()
-                    
+
                 except IntegrityError:
                     messages.add_message(request, messages.INFO, 'Username '+ str(user) +' is already taken. Usernames must be unique')
                     print("test2")
@@ -183,7 +183,7 @@ def register(request):
                     return render(request, 'fastcookapp/register.html', context)
                 print("test5")
                 return render(request, 'fastcookapp/login.html')
-            
+
         else:
             #returns an error if either of both password fields have not being populated
             messages.add_message(request, messages.INFO, 'Enter a value in both password fields')
@@ -214,7 +214,7 @@ def login(request):
                     #return render(request, 'fastcookapp/profile.html')
                 else:
                     messages.add_message(request, messages.INFO, 'The username or password is incorrect')
-                    return render(request, 'fastcookapp/login.html')    
+                    return render(request, 'fastcookapp/login.html')
             else:
                 messages.add_message(request, messages.INFO, 'The username or password is incorrect')
                 return render(request, 'fastcookapp/login.html')
@@ -227,7 +227,7 @@ def loginPage(request, user):
     return render (request, 'fastcookapp/login.html')
 
 
-@loggedin	
+@loggedin
 def saveData(request, user):
     if request.method == "POST":
     #Get user profile
@@ -275,7 +275,7 @@ def saveData(request, user):
         	#if XMLGraph.objects.filter(user = user, title = graphTitle).exists():
         		#return HttpResponse("overwrite")
         #else:
-        	xml.XMLGraph = xmlData 
+        	xml.XMLGraph = xmlData
         	xml.save()
 
         #member.XMLGraph.add(xml)
@@ -286,7 +286,7 @@ def saveData(request, user):
         """response = JsonResponse([
             member.XMLGraph
         ], safe = False);"""
-        
+
         return render_to_response("fastcookapp/index.html", content_type="text/xml;")
         #return render_to_response("fastcookapp/index.html",{"xmlData": json.dumps(member.XMLGraph)}, content_type="text/xml;")
     return HttpResponse('POST is not used')
@@ -408,7 +408,7 @@ def saveNewTitle(request, user):
 	xml = request.POST['xml']
 	currentTitle = request.POST['currentTitle']
 	graphId = request.POST['graphId']
-	
+
 
 	try:
 
@@ -468,30 +468,32 @@ def share(request, random_url, id):
 def loadIcons(request):
     #print(str("1 " + os.listdir("fastcookapp/images/")))
     search = []
-    path = "fastcookapp/images/ingredients/"
-    equipment =os.listdir(path+"equipment")
+    path = os.path.dirname(os.path.abspath(__file__)) + "/images/ingredients/"
+    #my_file = os.path.join(THIS_FOLDER, 'myfile.txt')
+    #path = "/home/fastcookapp/fastcook-pythonanywhere/fastcookapp/images/"
+    equipment =os.listdir(path+"Equipment/")
     equipment = list(filter(lambda fname: os.path.basename(fname) != 'Thumbs.db', equipment))
-    bakery =os.listdir(path+"Bakery") 
+    bakery =os.listdir(path+"Bakery/")
     bakery = list(filter(lambda fname: os.path.basename(fname) != 'Thumbs.db', bakery))
-    berries = os.listdir(path+"Berries")
+    berries = os.listdir(path+"Berries/")
     berries = list(filter(lambda fname: os.path.basename(fname) != 'Thumbs.db', berries))
-    dairies = os.listdir(path+"Dairies")
+    dairies = os.listdir(path+"Dairies/")
     dairies = list(filter(lambda fname: os.path.basename(fname) != 'Thumbs.db', dairies))
-    desserts = os.listdir(path+"Desserts")
+    desserts = os.listdir(path+"Desserts/")
     desserts = list(filter(lambda fname: os.path.basename(fname) != 'Thumbs.db', desserts))
-    dishes = os.listdir(path+"Dishes")
+    dishes = os.listdir(path+"Dishes/")
     dishes = list(filter(lambda fname: os.path.basename(fname) != 'Thumbs.db', dishes))
-    fruits = os.listdir(path+"fruits")
+    fruits = os.listdir(path+"Fruits/")
     fruits = list(filter(lambda fname: os.path.basename(fname) != 'Thumbs.db', fruits))
-    meat = os.listdir(path+"Meat")
+    meat = os.listdir(path+"Meat/")
     meat = list(filter(lambda fname: os.path.basename(fname) != 'Thumbs.db', meat))
-    nut = os.listdir(path+"Nut")
+    nut = os.listdir(path+"Nut/")
     nut = list(filter(lambda fname: os.path.basename(fname) != 'Thumbs.db', nut))
-    seafood = os.listdir(path+"Seafood")
+    seafood = os.listdir(path+"Seafood/")
     seafood = list(filter(lambda fname: os.path.basename(fname) != 'Thumbs.db', seafood))
-    vegetables = os.listdir(path+"Vegetables")
+    vegetables = os.listdir(path+"Vegetables/")
     vegetables = list(filter(lambda fname: os.path.basename(fname) != 'Thumbs.db', vegetables))
-    other = os.listdir(path+"other")
+    other = os.listdir(path+"other/")
     other = list(filter(lambda fname: os.path.basename(fname) != 'Thumbs.db', other))
 
     for root, dirs, files in os.walk(path):
@@ -500,11 +502,11 @@ def loadIcons(request):
                 ingredients = file.replace(".png","")
                 search.append(ingredients)
 
-    #print(img_list) 
+    #print(img_list)
     return JsonResponse({'equipment': equipment, 'bakery': bakery, 'berries': berries, 'dairies': dairies, 'desserts': desserts,
         'fruits': fruits, 'meat': meat, 'nut': nut, 'seafood': seafood, 'vegetables': vegetables, 'other': other, 'dishes': dishes, 'allFiles': search})
     """print("1 "+str(glob.glob('fastcookapp/images/icons/*.png')))
-    for filename in glob.glob('fastcookapp/images/icons/*.png'): 
+    for filename in glob.glob('fastcookapp/images/icons/*.png'):
         print(filename)
         im=Image.open(filename)
         image_list.append(im)
@@ -515,7 +517,8 @@ def loadIcons(request):
 @loggedin
 def search(request, user):
     name = request.POST['searchEngine']
-    path = 'fastcookapp/images/ingredients/'
+    path = '/home/fastcookapp/fastcook-pythonanywhere/fastcookapp/images/'
+    #path = str(path) + "/a"
     for root, dirs, files in os.walk(path):
         for file in files:
             if file.endswith('.png'):
@@ -536,7 +539,7 @@ def search(request, user):
                     """for file in equipment:
                         #print(file)
                         count= count + 1
-                        if search == lowercaseName: """                          
+                        if search == lowercaseName: """
                             #print(count)
 
                 #print(file)

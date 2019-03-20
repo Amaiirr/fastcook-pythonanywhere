@@ -29,7 +29,7 @@ SECRET_KEY = 'h^+x(g+dz1=53$e8wpl=+2it-w1-x*&mxpg%pyjp*yh4qhr0hf'
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = config('DEBUG', default=False, cast=bool)
+DEBUG = False
 
 ALLOWED_HOSTS = ['fastcookapp.pythonanywhere.com']
 
