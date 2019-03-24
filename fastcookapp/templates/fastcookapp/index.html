@@ -11,6 +11,17 @@
 
 </head>
 
+<style>
+    .ui-autocomplete {
+            max-height: 200px;
+            overflow-y: auto;
+            /* prevent horizontal scrollbar */
+            overflow-x: hidden;
+            /* add padding to account for vertical scrollbar */
+            padding-right: 20px;
+        }
+</style>
+
 
 
 <nav class="navbar navbar-expand navbar-light bg-light">
@@ -83,8 +94,15 @@
 
   {% csrf_token %}
 
-  <input  type="text" name = "searchEngine" id="searchEngine" placeholder="Type your ingredient here">
-  <button type="submit" id = "searchSubmit" style="display: none;"></button>
+  <!--<input  type="text" name = "searchEngine" id="searchEngine" placeholder="Type your ingredient here">
+  <button type="submit" id = "searchSubmit" style="display: none;"></button>-->
+
+  <div class="input-group">
+	<input type="text" name = "searchEngine" id="searchEngine" class="form-control" placeholder="Enter ingredient...">
+      <span class="input-group-btn">
+        <button class="btn btn-search" id = "searchSubmit" type="submit" style = "height: 40;"><i class="fa fa-search fa-fw"></i></button>
+      </span>
+  </div>
   <p id = "noResults"></p>
 
 </form>
