@@ -1030,8 +1030,8 @@ function main()
                                 var id = $(this).attr('id');
                                 var tr = $(this).closest('tr');
 
-                                console.log(id)
-                                console.log(tr)
+                                //console.log(id)
+                                //console.log(tr)
                                 $.ajax({
                                     type: "DELETE",
                                     url: id,
@@ -1134,7 +1134,7 @@ function main()
                         var encoder = new mxCodec();
                         var node = encoder.encode(graph.getModel());
                         var xml = mxUtils.getXml(node);
-                        console.log(xml)
+                        //console.log(xml)
                         var csrftoken = getCookie('csrftoken');
                         var title = $('#openTitle').val()
 
@@ -1182,7 +1182,7 @@ function main()
                     //var xml = mxUtils.getPrettyXml(node);
                     var xml = mxUtils.getXml(node);
                     var csrftoken = getCookie('csrftoken');
-                    console.log("test" + $("#idOfGraph").val())
+                    //console.log("test" + $("#idOfGraph").val())
 
                     $.ajax({
 
@@ -1310,11 +1310,11 @@ function main()
                     url: "/loadIcons/",
                     success: function (data) {
                         //console.log(data["images"][i])
-                            addMeasurementVertex("1 tbsp", '/images/ingredients/Measurement/tablespoon.png/', 60,80, 'measurement0')
-                            addMeasurementVertex("1 tsp", '/images/ingredients/Measurement/teaspoon.png/', 60,80, 'measurement1')
-                            addMeasurementVertex("1 scoop", '/images/ingredients/Measurement/scoop.png/', 60,80, 'measurement2')
-                            addMeasurementVertex("1 cup", '/images/ingredients/Measurement/cup.png/', 60,80, 'measurement3')
-                            addMeasurementVertex("1 inch", '/images/ingredients/Measurement/ruler.png/', 60,80, 'measurement4')
+                            addMeasurementVertex("1 tbsp", '/images/ingredients/Measurement/tablespoon.png', 60,80, 'measurement0')
+                            addMeasurementVertex("1 tsp", '/images/ingredients/Measurement/teaspoon.png', 60,80, 'measurement1')
+                            addMeasurementVertex("1 scoop", '/images/ingredients/Measurement/scoop.png', 60,80, 'measurement2')
+                            addMeasurementVertex("1 cup", '/images/ingredients/Measurement/cup.png', 60,80, 'measurement3')
+                            addMeasurementVertex("1 inch", '/images/ingredients/Measurement/ruler.png', 60,80, 'measurement4')
 
 
 
@@ -1333,74 +1333,74 @@ function main()
 
                             for (var i = 3; i >= 0; i--) {
 
-                                addEquipmentVertex("60 Minutes",'/images/ingredients/Equipment/'+ data["equipment"][i] + "/", 60, 80, 'equipment'+i);
+                                addEquipmentVertex("60 Minutes",'/images/ingredients/Equipment/'+ data["equipment"][i], 60, 80, 'equipment'+i);
 
                             }
 
                             for (var i = 4; i >= 0; i--) {
 
-                                addVertex("300g",'/images/ingredients/Bakery/'+ data["bakery"][i] + "/", 60, 80, 'rounded'+i);
+                                addVertex("300g",'/images/ingredients/Bakery/'+ data["bakery"][i], 60, 80, 'rounded'+i);
 
                             }
 
                             for (var i = 3; i >= 0; i--) {
 
-                                addBerriesVertex("300g",'/images/ingredients/Berries/'+ data["berries"][i] + "/", 60, 80, 'berries'+i);
+                                addBerriesVertex("300g",'/images/ingredients/Berries/'+ data["berries"][i], 60, 80, 'berries'+i);
 
                             }
 
                             for (var i = 2; i >= 0; i--) {
 
-                                addDairiesVertex("300g",'/images/ingredients/Dairies/'+ data["dairies"][i] + "/", 60, 80, 'dairies'+i);
+                                addDairiesVertex("300g",'/images/ingredients/Dairies/'+ data["dairies"][i], 60, 80, 'dairies'+i);
 
                             }
 
 
                             for (var i = 19; i >= 0; i--) {
 
-                                addFruitsVertex("300g",'/images/ingredients/Fruits/'+ data["fruits"][i] + "/", 60, 80, 'fruits'+i);
+                                addFruitsVertex("300g",'/images/ingredients/Fruits/'+ data["fruits"][i], 60, 80, 'fruits'+i);
 
                             }
 
                             for (var i = 8; i >= 0; i--) {
 
-                                addMeatVertex("300g",'/images/ingredients/Meat/'+ data["meat"][i] + "/", 60, 80, 'meat'+i);
+                                addMeatVertex("300g",'/images/ingredients/Meat/'+ data["meat"][i], 60, 80, 'meat'+i);
 
                             }
 
                             for (var i = 3; i >= 0; i--) {
 
-                                addNutVertex("300g",'/images/ingredients/Nut/'+ data["nut"][i] + "/", 60, 80, 'nut'+i);
+                                addNutVertex("300g",'/images/ingredients/Nut/'+ data["nut"][i] , 60, 80, 'nut'+i);
 
                             }
 
                             for (var i = 13; i >= 0; i--) {
 
-                                addOtherVertex("300g",'/images/ingredients/other/'+ data["other"][i] + "/", 60, 80, 'other'+i);
+                                addOtherVertex("300g",'/images/ingredients/other/'+ data["other"][i] , 60, 80, 'other'+i);
 
                             }
 
                             for (var i = 4; i >= 0; i--) {
 
-                                addSeafoodVertex("300g",'/images/ingredients/Seafood/'+ data["seafood"][i] + "/", 60, 80, 'seafood'+i);
+                                addSeafoodVertex("300g",'/images/ingredients/Seafood/'+ data["seafood"][i] , 60, 80, 'seafood'+i);
 
                             }
 
                             for (var i = 26; i >= 0; i--) {
 
-                                addVegetablesVertex("300g",'/images/ingredients/Vegetables/'+ data["vegetables"][i] + "/", 60, 80, 'vegetables'+i);
+                                addVegetablesVertex("300g",'/images/ingredients/Vegetables/'+ data["vegetables"][i] , 60, 80, 'vegetables'+i);
 
                             }
 
                            for (var i = 18; i >= 0; i--) {
 
-                                addDishesVertex("300g",'/images/ingredients/Dishes/'+ data["dishes"][i] + "/", 60, 80, 'dishes'+i);
+                                addDishesVertex("300g",'/images/ingredients/Dishes/'+ data["dishes"][i] , 60, 80, 'dishes'+i);
 
                             }
 
                            for (var i = 17; i >= 0; i--) {
 
-                                addDessertsVertex("300g",'/images/ingredients/Desserts/'+ data["desserts"][i] + "/", 60, 80, 'desserts'+i);
+                                addDessertsVertex("300g",'/images/ingredients/Desserts/'+ data["desserts"][i] , 60, 80, 'desserts'+i);
 
                             }
 
@@ -1432,7 +1432,7 @@ function main()
                                 var length = parseItems.length
 
 
-                                console.log(length)
+                                //console.log(length)
 
                                 for (var i = length - 1; i >= 0; i--) {
 
@@ -1505,13 +1505,13 @@ function main()
 
                                             document.getElementById("noResults").innerHTML = "";
                                             var json = JSON.parse(data)
-                                            console.log(json)
+                                            //console.log(json)
                                             //
                                             //console.log(length)
                                             //console.log(directory)
                                             //alert("test")
                                             var result = json[0]['results']
-                                            console.log(result)
+                                            //console.log(result)
 
 
 
@@ -1536,11 +1536,11 @@ function main()
                                                 ///home/fastcookapp/fastcook-pythonanywhere/fastcookapp/images/ingredients/Berries/strawberry.png
                                                 document.getElementById("noResults").innerHTML = "";
                                                 var dir = directory.replace('home/fastcookapp/fastcook-pythonanywhere/fastcookapp/','');
-                                                console.log(dir)
+                                                //console.log(dir)
                                                 var cat = dir.split('/')[3]
-                                                console.log("category " + cat)
+                                                //console.log("category " + cat)
                                                 var ingredient = dir.split('/')[4]
-                                                console.log("ingredient " + ingredient)
+                                                //console.log("ingredient " + ingredient)
                                                 ingredient = ingredient.replace('.png','')
                                                 var catLowerCase = cat.toLowerCase()
 
@@ -1554,36 +1554,36 @@ function main()
 
                                                 else if(ingredient == "tablespoon"){
                                                     clearToolbar()
-                                                    addSearchVertex("1 tbsp", '/images/ingredients/measurement/tablespoon.png/', 60,80, 'measurement0')
+                                                    addSearchVertex("1 tbsp", '/images/ingredients/measurement/tablespoon.png', 60,80, 'measurement0')
 
                                                 }
 
 
                                                 else if(ingredient == "teaspoon"){
                                                     clearToolbar()
-                                                    addSearchVertex("1 tsp", '/images/ingredients/measurement/teaspoon.png/', 60,80, 'measurement1')
+                                                    addSearchVertex("1 tsp", '/images/ingredients/measurement/teaspoon.png', 60,80, 'measurement1')
                                                 }
 
                                                 else if(ingredient == "cup"){
                                                     clearToolbar()
-                                                    addSearchVertex("1 cup", '/images/ingredients/measurement/scoop.png/', 60,80, 'measurement2')
+                                                    addSearchVertex("1 cup", '/images/ingredients/measurement/scoop.png', 60,80, 'measurement2')
                                                 }
 
                                                 else if(ingredient == "cup"){
                                                     clearToolbar()
-                                                    addSearchVertex("1 cup", '/images/ingredients/measurement/cup.png/', 60,80, 'measurement3')
+                                                    addSearchVertex("1 cup", '/images/ingredients/measurement/cup.png', 60,80, 'measurement3')
                                                 }
 
                                                 else if(ingredient == "ruler"){
                                                     clearToolbar()
-                                                    addSearchVertex("1 inch", '/images/ingredients/measurement/ruler.png/', 60,80, 'measurement4')
+                                                    addSearchVertex("1 inch", '/images/ingredients/measurement/ruler.png', 60,80, 'measurement4')
                                                 }
 
                                                 else{
                                                     //clearToolbar()
                                                     /*toolbarsearchEngine = new mxToolbar(searchToolbar);
                                                     toolbarsearchEngine.enabled = false*/
-                                                    console.log(catLowerCase+length)
+                                                    //console.log(catLowerCase+length)
                                                     clearToolbar()
                                                     addSearchVertex("300g", dir, 60,80, catLowerCase+length)
 
