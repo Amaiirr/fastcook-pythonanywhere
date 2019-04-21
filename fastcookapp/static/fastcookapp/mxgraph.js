@@ -1339,7 +1339,7 @@ function main()
 
                             for (var i = 4; i >= 0; i--) {
 
-                                addVertex("300g",'/images/ingredients/Bakery/'+ data["bakery"][i], 60, 80, 'rounded'+i);
+                                addVertex("300g",'/images/ingredients/Bakery/'+ data["bakery"][i], 60, 80, 'bakery'+i);
 
                             }
 
@@ -1543,7 +1543,7 @@ function main()
                                                 //console.log("ingredient " + ingredient)
                                                 ingredient = ingredient.replace('.png','')
                                                 var catLowerCase = cat.toLowerCase()
-
+                                                console.log(catLowerCase)
 
                                                 if(catLowerCase == "equipment"){
                                                     clearToolbar()
@@ -1585,6 +1585,7 @@ function main()
                                                     toolbarsearchEngine.enabled = false*/
                                                     //console.log(catLowerCase+length)
                                                     clearToolbar()
+
                                                     addSearchVertex("300g", dir, 60,80, catLowerCase+length)
 
                                                     //toolbarsearchEngine.destroy()

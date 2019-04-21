@@ -70,7 +70,7 @@ function loadStyleSheet(graph, sharedXml) {
                         style[i][mxConstants.STYLE_EDGE] = mxEdgeStyle.EntityRelation;
                         style[i][mxConstants.STYLE_VERTICAL_LABEL_POSITION] = mxConstants.ALIGN_BOTTOM;
                         style[i][mxConstants.STYLE_VERTICAL_ALIGN] = mxConstants.ALIGN_TOP;
-                        graph.getStylesheet().putCellStyle('rounded' + i, style[i]);
+                        graph.getStylesheet().putCellStyle('bakery' + i, style[i]);
 
 
                         //console.log(style[i][mxConstants.STYLE_IMAGE])

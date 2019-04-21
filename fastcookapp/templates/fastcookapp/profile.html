@@ -28,11 +28,11 @@
                       <h6> &nbsp; You can create a new recipe by clicking <a class = "newGraph" href="" data-toggle="modal" data-target="#createNewGraph">here</a> </h6>
 
                     </div>
-                  
+
                 </div>
-                
+
             </div>
-    
+
             <table id = "resizeable" class="table pure-table">
                 <thead>
                     <tr>
@@ -44,40 +44,41 @@
                 {% for titles in title %}
 
                 <tbody>
-                    <tr> 
+                    <tr>
                       <form method="GET" action="{% url 'openGraphFromProfile' title=titles.id %}">
-                        <td width="40%"> <input type = "submit" class = "openGraph btn btn-success" value = "{{titles.title}}" id="{% url 'openGraphFromProfile' title=titles.id %}"> </td> 
+                        <td width="40%"> <input type = "submit" class = "openGraph btn btn-success" value = "{{titles.title}}" id="{% url 'openGraphFromProfile' title=titles.id %}"> </td>
                         <td> {{titles.created_at}} </td>
                       </form>
-                        <td> 
-                          <button class = "btn btn-danger deleteButton" onclick="doFunction(this.id, this)" value = "Delete" id="{% url 'deleteGraph' title=titles.id %}"> 
+                        <td>
+                          <button class = "btn btn-danger deleteButton" onclick="doFunction(this.id, this)" value = "Delete" id="{% url 'deleteGraph' title=titles.id %}">
                           <span class="fa fa-trash"></span> Delete
-                          </button> 
+                          </button>
                         </td>
-                      
-                   </tr>     
+
+                   </tr>
                 </tbody>
               {% endfor %}
             </table>
         </div>
-    </div>   
+    </div>
 
 
 
 <div class="modal" id="createNewGraph">
     <div class="modal-dialog">
       <div class="modal-content">
-      
+
         <!-- Modal Header -->
         <div class="modal-header">
           <h4 class="modal-title">Create New Recipe</h4>
           <button type="button" class="close" data-dismiss="modal">&times;</button>
         </div>
-        
+
 
         <!-- Modal body -->
         <div class="modal-body">
         <form id= "formNewGraph" method = "POST" action = "{% url 'profile' %}">
+            {% csrf_token %}
            <input type="text" placeholder= "Enter Title" name="graphTitle22" id="graphTitle22" maxlength = "50">
             </br>
            <!--{% for message in messages %}
@@ -87,15 +88,15 @@
 
               <input id = "validation" type="hidden" value="{{error}}">
         </div>
-     
+
           <!-- Modal footer -->
           <div class="modal-footer">
-       
 
-            {% csrf_token %}
-          
-          <button type="button" class="btn btn-primary" name = "test123" id = "test123">Save</button>
-        
+
+
+
+          <button type="submit" class="btn btn-primary" name = "test123" id = "test123">Save</button>
+
         </form>
 
           <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
@@ -106,19 +107,19 @@
 
 
         </div>
-        
+
       </div>
     </div>
 </div>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
-<script src="{% static 'fastcookapp/newGraph.js' %}"></script> 
+<script src="{% static 'fastcookapp/newGraph.js' %}"></script>
 <script type="text/javascript">
     mxBasePath = "{% static 'fastcookapp/mxgraph-master/mxgraph-master/javascript/src' %}";
 </script>
 <script src="{% static 'fastcookapp/mxgraph-master/mxgraph-master/javascript/mxClient.js' %}"></script>
-    
+
 <script type="text/javascript">
 
   $(window).on('load',function(){
@@ -138,7 +139,7 @@
       return false;
      }
 });
-    
+
 </script>
 
 
